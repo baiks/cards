@@ -1,0 +1,32 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: Cards
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/cards?createDatabaseIfNotExist=true
+    username: root
+    password: Baiks@123
+    hikari:
+      auto-commit: true
+      minimumIdle: 10
+      maximumPoolSize: 200
+      connectionTimeout: 30000
+      idleTimeout: 600000
+      maxLifetime: 1800000
+  devtools:
+    add-properties: true
+  jpa:
+    show-sql: true
+    database: default
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+#secretKey: ruierytusytusytui
+#validityPeriodInMilliSecs: 300000
+springdoc:
+  swagger-ui.path:
+    /swagger-ui.html
