@@ -9,12 +9,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CardDto {
-	@NotBlank(message = "Name cannot be blank")
-	@Size(min = 1, message = "Minimum of 1 character is expected")
+	@NotBlank(message = "{validation.constraint.invalid.blank.name}")
+	@Size(min = 1, message = "{validation.constraint.invalid.blank.name}")
 	private String name;
-	@Pattern(regexp = "^#[A-Za-z0-9+_.-]+$", message = "Color must be alphanumeric characters prefixed with a #")
-	@NotBlank(message = "Color cannot be blank")
-	@Size(min = 7, max = 7, message = "7 characters expected")
+	@Pattern(regexp = "^#[A-Za-z0-9+_.-]+$", message = "{validation.constraint.invalid.regex.color}")
+	@NotBlank(message = "{validation.constraint.invalid.blank.color}")
+	@Size(min = 7, max = 7, message = "{validation.constraint.invalid.length.color}")
 	private String color;
 	private String description;
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.cards.cards.dtos.ErrorResponse;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
@@ -26,10 +27,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @ControllerAdvice
-public class CustControllerAdvice extends MessageSourceAdviceCtrl {
-	protected CustControllerAdvice(MessageSource messageSource) {
-		super(messageSource);
-	}
+public class CustControllerAdvice extends ResponseEntityExceptionHandler {
 
 	@Override
 	public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException e, HttpHeaders headers,

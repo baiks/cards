@@ -23,9 +23,11 @@ Open the project using IDE of you choice i.e. IntelliJ idea, spring tool suite e
     `username: root`
     `password: Baiks@123`
 - Turn on the liquibase flag to true
-    `liquibase:`
-       `change-log: classpath:/database/changelog-root.xml`
-       `enabled: false`
+```
+    liquibase:
+         change-log: classpath:/database/changelog-root.xml
+         enabled: false
+```
 
 
 #### Run the project

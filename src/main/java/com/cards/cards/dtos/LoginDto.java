@@ -12,14 +12,14 @@ import lombok.Setter;
 @NoArgsConstructor
 public class LoginDto {
 
-	@Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "Username should be a valid email address")
-	@NotBlank(message = "Username cannot be blank")
-	@Size(min = 6, max = 30, message = "Minimum of 6 and maximum of 30 characters expected")
+	@Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "{validation.constraint.invalid.regex.username}")
+	@NotBlank(message = "{validation.constraint.invalid.blank.username}")
+	@Size(min = 6, max = 30, message = "{validation.constraint.invalid.length.username}")
 	private String username;
 
-	@NotBlank(message = "Please enter a password")
-	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$", message = "Password must contain atleast 1 uppercase, 1 lowercase, 1 special character and 1 digit ")
-	@Size(min = 6, max = 15, message = "Minimum of 6 and maximum of 15 characters expected")
+	@NotBlank(message = "{validation.constraint.invalid.blank.password}")
+	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$", message = "{validation.constraint.invalid.regex.password}")
+	@Size(min = 6, max = 15, message = "{validation.constraint.invalid.length.password}")
 	private String password;
 
 }
