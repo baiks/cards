@@ -2,9 +2,9 @@ package com.cards.cards.services;
 
 import org.springframework.http.ResponseEntity;
 
-import com.cards.cards.pojos.JwtResponse;
-import com.cards.cards.pojos.LoginDto;
-import com.cards.cards.pojos.SignupDto;
+import com.cards.cards.dtos.JwtResponse;
+import com.cards.cards.dtos.LoginDto;
+import com.cards.cards.dtos.SignUpDto;
 
 public interface AuthTokenService {
 	/**
@@ -12,12 +12,12 @@ public interface AuthTokenService {
 	 * @param signupDto
 	 * @return
 	 */
-	SignupDto createUserAccount(SignupDto signupDto);
+	SignUpDto createUserAccount(SignUpDto signupDto);
 
 	/**
 	 *
 	 * @param loginDto
 	 * @return
 	 */
-	ResponseEntity<JwtResponse> authenticateUser(LoginDto loginDto);
+	ResponseEntity<JwtResponse> authenticateUser(LoginDto userDto);
 }

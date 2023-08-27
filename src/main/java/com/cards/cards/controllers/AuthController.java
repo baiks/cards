@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cards.cards.pojos.JwtResponse;
-import com.cards.cards.pojos.LoginDto;
-import com.cards.cards.pojos.SignupDto;
+import com.cards.cards.dtos.JwtResponse;
+import com.cards.cards.dtos.LoginDto;
+import com.cards.cards.dtos.SignUpDto;
 import com.cards.cards.services.AuthTokenService;
 
 @RestController
@@ -27,16 +27,18 @@ public class AuthController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "/signup")
 	@Operation(summary = "Create a user", description = "Returns the details of a user.\n" + "\n"
-			+ "Example Requests:\n" + "\n" + "user")
+			+ "Example Requests:\n" + "\n" + "{\n" + "  \"username\": \"XjytRAF73lFF3mp15uv9K6LIikJN-J\",\n"
+			+ "  \"password\": \"tm&v&gPVFD%c6sm\",\n" + "  \"role\": \"ADMIN\"\n" + "}")
 	@ApiResponses({ @ApiResponse(responseCode = "200", description = "POST: /signup") })
-	public SignupDto register(@Valid @RequestBody SignupDto signupDto) {
+	public SignUpDto register(@Valid @RequestBody SignUpDto signupDto) {
 		return authService.createUserAccount(signupDto);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/login")
-	@Operation(summary = "Login user", description = "Returns the JWT.\n" + "\n" + "Example Requests:\n" + "\n" + "jwt")
+	@Operation(summary = "Login user", description = "Returns the JWT.\n" + "\n" + "Example Requests:\n" + "\n" + "{\n"
+			+ "  \"username\": \"XkBjGVUYKPF7-H_2YLduecgvXQd6OL\",\n" + "  \"password\": \"Gg1wprYtN$xedty\"\n" + "}")
 	@ApiResponses({ @ApiResponse(responseCode = "200", description = "POST: /login") })
-	public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginDto loginDto) {
-		return authService.authenticateUser(loginDto);
+	public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginDto userDto) {
+		return authService.authenticateUser(userDto);
 	}
 }

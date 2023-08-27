@@ -1,4 +1,4 @@
-package com.cards.cards.pojos;
+package com.cards.cards.dtos;
 
 import lombok.*;
 

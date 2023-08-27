@@ -33,7 +33,7 @@ public class SecurityConfig {
 	private final JwtAuthTokenFilter jwtAuthTokenFilter;
 	private static final String[] SKIP_URLS = new String[] { "/swagger-resources/**", "/swagger-ui.html",
 			"/swagger-ui/**", "/auth/signup", "/auth/login", "/v3/api-docs/**", "/v2/api-docs/**", "/security/**",
-			"/resources/**", "/**" };
+			"/resources/**" };
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {

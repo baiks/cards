@@ -1,11 +1,12 @@
 package com.cards.cards.exceptions;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.context.MessageSource;
+import org.springframework.core.NestedExceptionUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,8 +17,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.server.ResponseStatusException;
 
-import com.cards.cards.pojos.ErrorResponse;
+import com.cards.cards.dtos.ErrorResponse;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 
 import lombok.extern.log4j.Log4j2;
@@ -45,7 +47,7 @@ public class CustControllerAdvice extends MessageSourceAdviceCtrl {
 	@ExceptionHandler(DataIntegrityViolationException.class)
 	public ResponseEntity<ErrorResponse> handleExceptionDataIntegrityViolationException(
 			DataIntegrityViolationException e) {
-		String message = e.getCause().getLocalizedMessage();
+		String message = NestedExceptionUtils.getMostSpecificCause(e).getMessage();
 		log.error("Invalid input " + message);
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 				.body(new ErrorResponse(HttpStatus.BAD_REQUEST.toString(), message));
@@ -53,8 +55,16 @@ public class CustControllerAdvice extends MessageSourceAdviceCtrl {
 
 	@ExceptionHandler(MismatchedInputException.class)
 	public ResponseEntity<ErrorResponse> handleExceptionMismatchedInputException(MismatchedInputException e) {
-		String message = "Invalid Data types";
-		log.error("Mismatched Input Exception..." + e.getMessage());
+		String message = NestedExceptionUtils.getMostSpecificCause(e).getMessage();
+		log.error("Mismatched Input Exception..." + message);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+				.body(new ErrorResponse(HttpStatus.BAD_REQUEST.toString(), message));
+	}
+
+	@ExceptionHandler(value = { ResponseStatusException.class })
+	public ResponseEntity<Object> handleApiRequestException(ResponseStatusException e) {
+		String message = NestedExceptionUtils.getMostSpecificCause(e).getMessage();
+		log.error("ResponseStatusException Exception..." + message);
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 				.body(new ErrorResponse(HttpStatus.BAD_REQUEST.toString(), message));
 	}

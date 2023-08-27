@@ -25,8 +25,9 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
-#secretKey: ruierytusytusytui
-#validityPeriodInMilliSecs: 300000
+  liquibase:
+    change-log: classpath:/database/changelog-root.xml
+    enabled: false
 springdoc:
   swagger-ui.path:
     /swagger-ui.html

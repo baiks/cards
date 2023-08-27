@@ -3,9 +3,11 @@ package com.cards.cards.repos;
 import com.cards.cards.entity.Users;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 public class UserDetailsImpl implements UserDetails {
@@ -15,20 +17,23 @@ public class UserDetailsImpl implements UserDetails {
 	private final String name;
 	@JsonIgnore
 	private final String password;
+	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserDetailsImpl(Long id, String name, String password) {
+	public UserDetailsImpl(Long id, String name, String password, Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.name = name;
 		this.password = password;
+		this.authorities = authorities;
 	}
 
 	public static UserDetailsImpl build(Users users) {
-		return new UserDetailsImpl(users.getId(), users.getUsername(), users.getPassword());
+		List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(users.getRole()));
+		return new UserDetailsImpl(users.getId(), users.getUsername(), users.getPassword(), authorities);
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		return authorities;
 	}
 
 	public Long getId() {
