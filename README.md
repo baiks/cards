@@ -41,6 +41,8 @@ Open the project using IDE of you choice i.e. IntelliJ idea, spring tool suite e
 To access the APIs, open the link http://localhost:8080/swagger-ui/index.html
 ```
 
+![image](https://github.com/baiks/cards/assets/8487325/0ba3be40-02dc-4145-950e-734fefeabe6e)
+
 ```sh
 You can create your own user on swagger or alternatively use the already configured users.
 ```
@@ -54,3 +56,8 @@ You can create your own user on swagger or alternatively use the already configu
 `Password: member@123`
 
 
+
+
+
+
+`
